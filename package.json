@@ -1,0 +1,76 @@
+{
+  "name": "Starter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "install:server": "npm ci --include=dev",
+    "install:client": "npm --prefix client ci --include=dev",
+    "install:all": "npm-run-all2 -s install:server install:client",
+    "dev": "npm-run-all2 -p dev:server dev:client",
+    "dev:server": "tsx watch src/index.ts",
+    "dev:client": "npm --prefix client run dev",
+    "build": "npm-run-all2 -p build:server build:client",
+    "build:server": "tsc -p tsconfig.json",
+    "build:client": "npm --prefix client run build",
+    "prebuild": "npm --prefix client ci --include=dev",
+    "start": "node dist/index.js",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate",
+    "prisma:studio": "npx prisma studio",
+    "prisma:schema": "npx prisma db push",
+    "prisma:seed": "npx prisma db seed",
+    "prisma": "npm run prisma:generate && npm run prisma:migrate && npm run prisma:schema"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.14.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "morgan": "^1.10.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^24.3.0",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "npm-run-all2": "^8.0.4",
+    "prisma": "^6.14.0",
+    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20 <21"
+  },
+  "packageManager": "npm@10",
+  "overrides": {},
+  "pnpm": {},
+  "optionalDependencies": {},
+  "private": false,
+  "directories": {},
+  "config": {},
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ],
+  "workspaces": [],
+  "funding": [],
+  "files": [],
+  "sideEffects": false,
+  "bugs": {},
+  "homepage": "",
+  "description": "",
+  "postinstall": "npm --prefix client ci --include=dev && prisma generate"
+}
