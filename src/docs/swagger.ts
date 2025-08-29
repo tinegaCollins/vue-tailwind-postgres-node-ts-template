@@ -5,7 +5,7 @@ const swaggerDefinition = {
   info: {
     title: "Users API",
     version: "1.0.0",
-    description: "API documentation for the Users Management System",
+    description: "API documentation for the Users  System",
   },
   servers: [{ url: "/api", description: "API Base (relative to server)" }],
   components: {
@@ -13,114 +13,123 @@ const swaggerDefinition = {
       User: {
         type: "object",
         properties: {
-          id: { 
+          id: {
             type: "string",
-            description: "Unique identifier for the user"
+            description: "Unique identifier for the user",
           },
-          name: { 
+          name: {
             type: "string",
-            description: "Full name of the user"
+            description: "Full name of the user",
           },
-          email: { 
+          email: {
             type: "string",
             format: "email",
-            description: "Email address (unique)"
+            description: "Email address (unique)",
           },
-          phone: { 
+          phone: {
             type: "string",
-            description: "Phone number"
+            description: "Phone number",
           },
-          role: { 
+          role: {
             type: "string",
-            description: "User role (default: USER)"
+            description: "User role (default: USER)",
           },
-          isActive: { 
+          isActive: {
             type: "boolean",
-            description: "Whether the user is active"
+            description: "Whether the user is active",
           },
-          createdAt: { 
-            type: "string", 
+          createdAt: {
+            type: "string",
             format: "date-time",
-            description: "When the user was created"
+            description: "When the user was created",
           },
-          updatedAt: { 
-            type: "string", 
+          updatedAt: {
+            type: "string",
             format: "date-time",
-            description: "When the user was last updated"
+            description: "When the user was last updated",
           },
         },
-        required: ["id", "name", "email", "phone", "role", "isActive", "createdAt", "updatedAt"],
+        required: [
+          "id",
+          "name",
+          "email",
+          "phone",
+          "role",
+          "isActive",
+          "createdAt",
+          "updatedAt",
+        ],
       },
       UserCreate: {
         type: "object",
         required: ["name", "email", "phone"],
         properties: {
-          name: { 
+          name: {
             type: "string",
-            description: "Full name of the user"
+            description: "Full name of the user",
           },
-          email: { 
+          email: {
             type: "string",
             format: "email",
-            description: "Email address (must be unique)"
+            description: "Email address (must be unique)",
           },
-          phone: { 
+          phone: {
             type: "string",
-            description: "Phone number"
+            description: "Phone number",
           },
-          role: { 
+          role: {
             type: "string",
             default: "USER",
-            description: "User role"
+            description: "User role",
           },
-          isActive: { 
+          isActive: {
             type: "boolean",
             default: true,
-            description: "Whether the user is active"
+            description: "Whether the user is active",
           },
         },
       },
       UserUpdate: {
         type: "object",
         properties: {
-          name: { 
+          name: {
             type: "string",
-            description: "Full name of the user"
+            description: "Full name of the user",
           },
-          email: { 
+          email: {
             type: "string",
             format: "email",
-            description: "Email address (must be unique)"
+            description: "Email address (must be unique)",
           },
-          phone: { 
+          phone: {
             type: "string",
-            description: "Phone number"
+            description: "Phone number",
           },
-          role: { 
+          role: {
             type: "string",
-            description: "User role"
+            description: "User role",
           },
-          isActive: { 
+          isActive: {
             type: "boolean",
-            description: "Whether the user is active"
+            description: "Whether the user is active",
           },
         },
       },
       Error: {
         type: "object",
         properties: {
-          error: { 
-            type: "string", 
-            description: "Error message" 
+          error: {
+            type: "string",
+            description: "Error message",
           },
         },
       },
       NukeResponse: {
         type: "object",
         properties: {
-          message: { 
-            type: "string", 
-            description: "Success message" 
+          message: {
+            type: "string",
+            description: "Success message",
           },
           timestamp: {
             type: "string",
@@ -224,7 +233,8 @@ const swaggerDefinition = {
             },
           },
           400: {
-            description: "Bad request - missing required fields or validation error",
+            description:
+              "Bad request - missing required fields or validation error",
             content: {
               "application/json": {
                 schema: { $ref: "#/components/schemas/Error" },
@@ -420,7 +430,8 @@ const swaggerDefinition = {
     "/users/nuke": {
       delete: {
         summary: "Clear all users from database",
-        description: "Remove all users from the database. This is a destructive operation and should be used with caution.",
+        description:
+          "Remove all users from the database. This is a destructive operation and should be used with caution.",
         tags: ["Database"],
         responses: {
           200: {

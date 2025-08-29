@@ -6,7 +6,7 @@
   - You are about to drop the `ContractDetails` table. If the table is not empty, all the data it contains will be lost.
   - You are about to drop the `Department` table. If the table is not empty, all the data it contains will be lost.
   - You are about to drop the `GeneralInquiryDetails` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `ProcurementRequest` table. If the table is not empty, all the data it contains will be lost.
+  - You are about to drop the `templateRequest` table. If the table is not empty, all the data it contains will be lost.
   - You are about to drop the `SourcingEventDetails` table. If the table is not empty, all the data it contains will be lost.
   - A unique constraint covering the columns `[email]` on the table `User` will be added. If there are existing duplicate values, this will fail.
   - Added the required column `email` to the `User` table without a default value. This is not possible if the table is not empty.
@@ -26,10 +26,10 @@ ALTER TABLE "public"."Department" DROP CONSTRAINT "Department_userId_fkey";
 ALTER TABLE "public"."GeneralInquiryDetails" DROP CONSTRAINT "GeneralInquiryDetails_requestId_fkey";
 
 -- DropForeignKey
-ALTER TABLE "public"."ProcurementRequest" DROP CONSTRAINT "ProcurementRequest_departmentId_fkey";
+ALTER TABLE "public"."templateRequest" DROP CONSTRAINT "templateRequest_departmentId_fkey";
 
 -- DropForeignKey
-ALTER TABLE "public"."ProcurementRequest" DROP CONSTRAINT "ProcurementRequest_userId_fkey";
+ALTER TABLE "public"."templateRequest" DROP CONSTRAINT "templateRequest_userId_fkey";
 
 -- DropForeignKey
 ALTER TABLE "public"."SourcingEventDetails" DROP CONSTRAINT "SourcingEventDetails_requestId_fkey";
@@ -57,7 +57,7 @@ DROP TABLE "public"."Department";
 DROP TABLE "public"."GeneralInquiryDetails";
 
 -- DropTable
-DROP TABLE "public"."ProcurementRequest";
+DROP TABLE "public"."templateRequest";
 
 -- DropTable
 DROP TABLE "public"."SourcingEventDetails";
@@ -66,7 +66,7 @@ DROP TABLE "public"."SourcingEventDetails";
 DROP TYPE "public"."ContractType";
 
 -- DropEnum
-DROP TYPE "public"."ProcurementTaskType";
+DROP TYPE "public"."templateTaskType";
 
 -- DropEnum
 DROP TYPE "public"."RequestStatus";

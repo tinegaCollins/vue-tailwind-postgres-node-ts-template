@@ -5,7 +5,7 @@ CREATE TYPE "public"."RequestStatus" AS ENUM ('DRAFT', 'SUBMITTED', 'CANCELLED')
 CREATE TYPE "public"."ContractType" AS ENUM ('PURCHASE_AGREEMENT', 'SERVICE_CONTRACT', 'MASTER_SERVICE_AGREEMENT', 'NON_DISCLOSURE_AGREEMENT', 'OTHER');
 
 -- CreateEnum
-CREATE TYPE "public"."ProcurementTaskType" AS ENUM ('BUYING_GOODS', 'CREATING_CONTRACT', 'SOURCING_EVENT', 'GENERAL_INQUIRY');
+CREATE TYPE "public"."templateTaskType" AS ENUM ('BUYING_GOODS', 'CREATING_CONTRACT', 'SOURCING_EVENT', 'GENERAL_INQUIRY');
 
 -- CreateTable
 CREATE TABLE "public"."User" (
@@ -30,10 +30,10 @@ CREATE TABLE "public"."Department" (
 );
 
 -- CreateTable
-CREATE TABLE "public"."ProcurementRequest" (
+CREATE TABLE "public"."templateRequest" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "taskType" "public"."ProcurementTaskType" NOT NULL,
+    "taskType" "public"."templateTaskType" NOT NULL,
     "username " TEXT NOT NULL,
     "departmentId" TEXT NOT NULL,
     "projectName" TEXT NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE "public"."ProcurementRequest" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "ProcurementRequest_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "templateRequest_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -133,13 +133,13 @@ CREATE INDEX "Department_userId_name_idx" ON "public"."Department"("userId", "na
 CREATE UNIQUE INDEX "Department_userId_code_key" ON "public"."Department"("userId", "code");
 
 -- CreateIndex
-CREATE INDEX "ProcurementRequest_userId_taskType_status_idx" ON "public"."ProcurementRequest"("userId", "taskType", "status");
+CREATE INDEX "templateRequest_userId_taskType_status_idx" ON "public"."templateRequest"("userId", "taskType", "status");
 
 -- CreateIndex
-CREATE INDEX "ProcurementRequest_userId_departmentId_idx" ON "public"."ProcurementRequest"("userId", "departmentId");
+CREATE INDEX "templateRequest_userId_departmentId_idx" ON "public"."templateRequest"("userId", "departmentId");
 
 -- CreateIndex
-CREATE INDEX "ProcurementRequest_userId_requiredByDate_idx" ON "public"."ProcurementRequest"("userId", "requiredByDate");
+CREATE INDEX "templateRequest_userId_requiredByDate_idx" ON "public"."templateRequest"("userId", "requiredByDate");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ContractDetails_requestId_key" ON "public"."ContractDetails"("requestId");
@@ -157,19 +157,19 @@ CREATE UNIQUE INDEX "GeneralInquiryDetails_requestId_key" ON "public"."GeneralIn
 ALTER TABLE "public"."Department" ADD CONSTRAINT "Department_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."ProcurementRequest" ADD CONSTRAINT "ProcurementRequest_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."templateRequest" ADD CONSTRAINT "templateRequest_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."ProcurementRequest" ADD CONSTRAINT "ProcurementRequest_departmentId_fkey" FOREIGN KEY ("departmentId") REFERENCES "public"."Department"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."templateRequest" ADD CONSTRAINT "templateRequest_departmentId_fkey" FOREIGN KEY ("departmentId") REFERENCES "public"."Department"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."ContractDetails" ADD CONSTRAINT "ContractDetails_requestId_fkey" FOREIGN KEY ("requestId") REFERENCES "public"."ProcurementRequest"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."ContractDetails" ADD CONSTRAINT "ContractDetails_requestId_fkey" FOREIGN KEY ("requestId") REFERENCES "public"."templateRequest"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."BuyingGoodsDetails" ADD CONSTRAINT "BuyingGoodsDetails_requestId_fkey" FOREIGN KEY ("requestId") REFERENCES "public"."ProcurementRequest"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."BuyingGoodsDetails" ADD CONSTRAINT "BuyingGoodsDetails_requestId_fkey" FOREIGN KEY ("requestId") REFERENCES "public"."templateRequest"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."SourcingEventDetails" ADD CONSTRAINT "SourcingEventDetails_requestId_fkey" FOREIGN KEY ("requestId") REFERENCES "public"."ProcurementRequest"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."SourcingEventDetails" ADD CONSTRAINT "SourcingEventDetails_requestId_fkey" FOREIGN KEY ("requestId") REFERENCES "public"."templateRequest"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."GeneralInquiryDetails" ADD CONSTRAINT "GeneralInquiryDetails_requestId_fkey" FOREIGN KEY ("requestId") REFERENCES "public"."ProcurementRequest"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."GeneralInquiryDetails" ADD CONSTRAINT "GeneralInquiryDetails_requestId_fkey" FOREIGN KEY ("requestId") REFERENCES "public"."templateRequest"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
