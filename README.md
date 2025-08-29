@@ -1,4 +1,4 @@
-# Procurement Management System
+# Template starter
 
 Monorepo-style project with:
 
